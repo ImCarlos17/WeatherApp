@@ -6,13 +6,30 @@
     <title>Weather App</title>
   </head>
   <body>
-    <div class="container">
-      <form action="">
-        <label for="city">City</label>
-        <input type="text" name="city" id="city" />
-        <button type="submit">Search</button>
-        <span></span>
-      </form>
+    <header>
+      <h1>Weather App</h1>
+      <div class="container-input">
+        <form action="">
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Enter city name"
+          />
+          <button type="submit">Search</button>
+          <span></span>
+        </form>
+      </div>
+    </header>
+
+    <div class="container-main">
+      <section>
+        <h1 class="location"></h1>
+        <p class="dateTime"></p>
+        <p class="temperature"></p>
+        <p class="weatherDescription"></p>
+        <p class="weatherInfo"></p>
+      </section>
     </div>
   </body>
 </html>

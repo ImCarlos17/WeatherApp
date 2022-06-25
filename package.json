@@ -17,6 +17,7 @@
     "internal-ip": "^7.0.0",
     "mini-css-extract-plugin": "^1.3.9",
     "portfinder-sync": "0.0.2",
+    "pubsub-js": "^1.9.4",
     "raw-loader": "^4.0.2",
     "style-loader": "^2.0.0",
     "webpack": "^5.24.2",
