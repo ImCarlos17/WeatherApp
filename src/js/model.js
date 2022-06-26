@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+import moment from "moment";
 
 const moduleWeatherData = (() => {
   const form = document.querySelector("form");
@@ -16,33 +17,30 @@ const moduleWeatherData = (() => {
     return { temp, feels_like, humidity };
   };
 
-  const getFormtDateTime = (dt) => {
-    dt = new Date(dt * 1000);
-    return dt.toLocaleString();
+  const getDateTime = (dt, timezone) => {
+    let date = moment(dt + timezone);
+    date = moment.utc(date * 1000).format("LLLL");
+    return date;
   };
 
-  const createWeaterObject = ({ name, sys, dt, main, weather, wind }) => {
+  const createWeaterObject = ({
+    name,
+    sys,
+    dt,
+    timezone,
+    main,
+    weather,
+    wind,
+  }) => {
     return {
       name,
       sys,
-      dt: getFormtDateTime(dt),
+      dt: getDateTime(dt, timezone),
       main: kelvinToCelcius(main),
       weather,
       wind,
     };
   };
-  const weatherDataControl = (() => {
-    let weatherDataMain = {};
-    const set = (weatherData) => {
-      weatherDataMain = weatherData;
-    };
-
-    const get = () => {
-      return weatherDataMain;
-    };
-
-    return { get, set };
-  })();
 
   const getWeatherData = async ({ lat, lon }) => {
     try {
@@ -51,7 +49,7 @@ const moduleWeatherData = (() => {
       );
 
       const weatherData = await response.json();
-      weatherDataControl.set(weatherData);
+      console.log(weatherData);
       PubSub.publish(GET_DATA_WEATGER, createWeaterObject(weatherData));
     } catch (error) {
       console.log(error);
@@ -65,7 +63,6 @@ const moduleWeatherData = (() => {
       );
 
       const dataCity = await response.json();
-
       const geoLocateCity = { lat: dataCity[0].lat, lon: dataCity[0].lon };
       getWeatherData(geoLocateCity);
     } catch (error) {

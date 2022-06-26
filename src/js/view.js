@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js";
+
 const GET_DATA_WEATGER = "GET_DATA_WEATGER";
 const location = document.querySelector(".location");
 const weatherDescription = document.querySelector(".weatherDescription");
@@ -9,7 +10,6 @@ const dateTime = document.querySelector(".dateTime");
 const moduleView = (() => {
   const renderWeatherInfo = (msg, weatherInfo) => {
     console.log(weatherInfo);
-
     location.textContent = `${weatherInfo.name}, ${weatherInfo.sys.country}`;
     dateTime.textContent = `${weatherInfo.dt}`;
     temperature.textContent = `${weatherInfo.main.temp}°C`;
