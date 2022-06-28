@@ -1,7 +1,6 @@
 import PubSub from "pubsub-js";
 import moment from "moment";
 import boxWeather from "../component/weatherInfoBox";
-const mainContent = document.querySelector(".container-main");
 
 const moduleWeatherData = (() => {
   const form = document.querySelector("form");
